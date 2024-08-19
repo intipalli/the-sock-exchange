@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 import Sock from "./components/Sock";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
 import sock_data from './assets/sock.json';
+import Promo from './components/Promo';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
                 <a className="nav-link disabled" aria-disabled="true">Disabled</a>
               </li>
             </ul>
-           <Search />
+            <Search />
           </div>
         </div>
       </nav>
@@ -47,16 +48,19 @@ function App() {
         <div className="container-fluid">
           <div className="row">
             Both socks and space rockets 🚀 will take you to new heights, but only one will get cold feet!
-            <div className="card-container">
-              <Sock data={sock_data} />
+            <Promo />
+            <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>              
+              {sock_data.map((sock) => (
+                <Sock key={sock.id} data={sock} />
+              ))}
             </div>
           </div>
-          <Footer environment="Development"/>
-
         </div>
+        <Footer environment="Development" />
+
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
